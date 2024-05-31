@@ -17,7 +17,7 @@
 
 "use strict";
 
-var fflate = require("fflate");
+// var fflate = require("fflate");
 var DictionaryLoader = require("./DictionaryLoader");
 
 /**
@@ -43,12 +43,9 @@ BrowserDictionaryLoader.prototype.loadArrayBuffer = function (url, callback) {
         }
 
         response.arrayBuffer().then(function (arraybuffer) {
-            try {
-            var gz = fflate.gunzipSync(new Uint8Array(arraybuffer));
-            callback(null, gz.buffer);
-            } catch {
-                console.log('url used:', response.url);
-            }
+            // var gz = fflate.gunzipSync(new Uint8Array(arraybuffer));
+            // callback(null, gz.buffer);
+            callback(null, new Uint8Array(arraybuffer));
         });
     }).catch(function (exception) {
         callback(exception, null);
