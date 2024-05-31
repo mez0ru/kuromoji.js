@@ -43,8 +43,12 @@ BrowserDictionaryLoader.prototype.loadArrayBuffer = function (url, callback) {
         }
 
         response.arrayBuffer().then(function (arraybuffer) {
+            try {
             var gz = fflate.gunzipSync(new Uint8Array(arraybuffer));
             callback(null, gz.buffer);
+            } catch {
+                console.log('url used:', response.url);
+            }
         });
     }).catch(function (exception) {
         callback(exception, null);
